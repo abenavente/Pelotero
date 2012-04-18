@@ -3,7 +3,7 @@ class LocalsController < ApplicationController
   # GET /locals
   # GET /locals.json
   def index
-    @locals = Local.all
+    @locals = Local.where(:owner_id => current_owner)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,7 +41,7 @@ class LocalsController < ApplicationController
   # POST /locals
   # POST /locals.json
   def create
-    @local = Local.new(params[:local])
+    @local = Local.new(params[:local].merge(:owner => current_owner))
 
     respond_to do |format|
       if @local.save
@@ -81,4 +81,12 @@ class LocalsController < ApplicationController
       format.json { head :no_content }
     end
   end
+private
+def set_usuario(current_user)
+  if current_user
+    @owner = current_user.id
+  else
+    @owner = param_owner
+  end
+end
 end

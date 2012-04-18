@@ -14,7 +14,7 @@
   <tr>
     <td><%= local.name %></td>
     <td><%= local.address %></td>
-    <td><%= local.owner %></td>
+    <td><%= local.owner.email %></td>
     <td><%= link_to 'Show', local %></td>
     <td><%= link_to 'Edit', edit_local_path(local) %></td>
     <td><%= link_to 'Destroy', local, confirm: 'Are you sure?', method: :delete %></td>
